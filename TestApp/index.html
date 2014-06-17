@@ -17,12 +17,13 @@
     <script src="scripts/login.js"></script>
     <script src="scripts/location.js"></script>
     <script src="scripts/weather.js"></script>
+     <script src="scripts/tracker.js"></script>
     <script src="scripts/app.js"></script>
 
 </head>
 <body>
     <!--Home-->
-    <div id="tabstrip-rates"
+    <div id="tabstrip-rates" 
         data-role="view"
         data-title="Rates"
         data-model="app.getrateService.viewModel">
@@ -93,7 +94,7 @@
     <!--Location-->
     <div id="tabstrip-location"
         data-role="view"
-        data-title="Location"
+        data-title="Drop"
         data-init="app.locationService.initLocation"
         data-show="app.locationService.show"
         data-hide="app.locationService.hide"
@@ -101,7 +102,7 @@
         data-stretch="true">
 
         <div id="no-map" data-bind="invisible: isGoogleMapsInitialized">
-            Location requires internet connection to display the map.
+            Drop off locator requires internet connection to display the map.
         </div>
         <div id="map-search-wrap" data-bind="visible: isGoogleMapsInitialized">
             <button id="map-navigate-home" data-bind="click: onNavigateHome"></button>
@@ -115,13 +116,13 @@
     </div>
 
     <!--Weather-->
-    <div id="tabstrip-weather"
+    <div id="tabstrip-tracker"
         data-role="view"
-        data-title="Weather"
-        data-model="app.weatherService.viewModel">
+        data-title="Track"
+        data-model="app.trackerService.viewModel">
 
-        <div class="weather">
-            <p class="weather-title">20-Day Forecast</p>
+        <div class="track">
+            <p class="track-title">Package Tracker</p>
 
             <div class="separator">
                 <div class="dark"></div>
@@ -130,24 +131,24 @@
 
             <ul class="forecast-list"
                 data-role="listview"
-                data-bind="source: weatherDataSource"
-                data-template="weather-forecast-template">
+                data-bind="source: trackerDataSource"
+                data-template="tracker-template">
             </ul>
         </div>
     </div>
 
     <!--Weather forecast template-->
-    <script type="text/x-kendo-tmpl" id="weather-forecast-template">
+    <script type="text/x-kendo-tmpl" id="tracker-template">
         <div>
             <div class="position-left">
-                <span class="weather-info date">${day}</span>
+                <span class="weather-info date">#=TrackingNumber#</span>
             </div>
             <div class="position-right">
-                <span class="weather-info temperature high">${highTemperature}<sup>&deg;</sup></span>
-                <span class="weather-info temperature low">${lowTemperature}<sup>&deg;</sup></span>
+                <span class="weather-info temperature high">#=TrackingNumber#<sup>&deg;</sup></span>
+                <span class="weather-info temperature low">#=TrackingNumber#<sup>&deg;</sup></span>
             </div>
             <div class="position-center">
-                <span class="weather-icon ${image}"></span>
+                <span class="weather-icon"></span>
             </div>
         </div>
     </script>
@@ -168,7 +169,7 @@
                 <a href="#tabstrip-rates" data-icon="home">Rates</a>
                 <!--    <a href="#tabstrip-login" data-icon="contacts">Login</a> -->
                 <a href="#tabstrip-location" data-icon="search">Drop Off Locations</a>
-                <a href="#tabstrip-weather" data-icon="globe">Weather</a>
+                <a href="#tabstrip-tracker" data-icon="globe">Tracker</a>
             </div>
         </div>
     </div> 
