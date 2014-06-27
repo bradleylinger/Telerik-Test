@@ -142,13 +142,32 @@
     </ul>
     <a data-click="addNew" class="addNew" type="button" data-role="button">Add New Tracking Number</a>
 </div>
-
-<script type="text/x-kendo-tmpl" id="pull-with-endless-template">
-    <div class="product-item">
-        <h3>#:TrackingNumber#</h3>
-       
+    
+<div data-role="modalview" id="packageTrackingDetailsModalView" style="width: 95%; height: 12em;">
+    <div data-role="header">
+        <div data-role="navbar">
+            <span>Package Details</span>
+            <a data-click="packageTrackingDetailsModalView_Close" data-role="button" data-align="right">Close</a>
+        </div>
     </div>
-</script>
+
+    <ul data-role="listview" data-style="inset">
+        <li>
+            <input type="text" id="trackingDetails" />
+        </li>
+    </ul>
+</div>
+<!-- <a href="\#packageTrackingDetailsModalView?id=#:TrackingNumber#" class="km-listview-link" data-role="listview-link">#:TrackingNumber#</a> -->
+<script type="text/x-kendo-tmpl" id="pull-with-endless-template">
+
+    <div class="product-item">
+       <h3>
+       
+         <a   data-role="button" data-rel="modalview" data-trackingnumber="#:TrackingNumber#" data-click="viewPackgeTrackingDetails_Click" >#:TrackingNumber#</a>
+    </h3>
+    </div>
+    
+</script> 
 <script>
     function mobileListViewPullWithEndless(e) {
         var userUid = "1";
@@ -200,7 +219,17 @@
             });
         });
     }
+    
+    function viewPackgeTrackingDetails_Click(e) {
+            var data = e.button.data();
+            $("#trackingDetails").val(data.trackingnumber);
+         $("#packageTrackingDetailsModalView").kendoMobileModalView("open");
+        }
 
+	function packageTrackingDetailsModalView_Close() {
+        $("#packageTrackingDetailsModalView").kendoMobileModalView("close");
+    }
+    
     function closeModalViewAdd() {
         $("#modalview-add").kendoMobileModalView("close");
     }
