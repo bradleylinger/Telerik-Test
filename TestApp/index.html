@@ -115,31 +115,142 @@
 
     </div>
 
-    <!--Weather-->
-    <div id="tabstrip-tracker"
-        data-role="view"
-        data-title="Track"
-        data-model="app.trackerService.viewModel">
+    <!--Package Tracker-->
+    <div  id="tabstrip-tracker" data-role="view" data-title="Track" data-init="mobileListViewPullWithEndless" data-title="Pull to refresh">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-align="left" data-icon="add" data-role="button" data-rel="modalview" href="#modalview-add"></a>
+            <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a>
+        </div>
+    </header>
+    <ul id="pull-with-endless-listview"></ul>
+</div>
 
-        <div class="track">
-            <p class="track-title">Package Tracker</p>
-
-            <div class="separator">
-                <div class="dark"></div>
-                <div class="light"></div>
-            </div>
-
-            <ul class="forecast-list"
-                data-role="listview"
-                data-bind="source: trackerDataSource"
-                data-template="tracker-template">
-            </ul>
+<div data-role="modalview" id="modalview-add" style="width: 95%; height: 12em;">
+    <div data-role="header">
+        <div data-role="navbar">
+            <span>Add Tracking Number</span>
+            <a data-click="closeModalViewAdd" data-role="button" data-align="right">Cancel</a>
         </div>
     </div>
 
-    <!--Weather forecast template-->
+    <ul data-role="listview" data-style="inset">
+        <li>
+            <label for="username">Packages:</label>
+            <input type="text" id="name" /></li>
+    </ul>
+    <a data-click="addNew" class="addNew" type="button" data-role="button">Add New Tracking Number</a>
+</div>
+
+<script type="text/x-kendo-tmpl" id="pull-with-endless-template">
+    <div class="product-item">
+        <h3>#:TrackingNumber#</h3>
+       
+    </div>
+</script>
+<script>
+    function mobileListViewPullWithEndless(e) {
+        var userUid = "1";
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                        type       : "GET",
+                        url        : "http://centralapi.aliasmedia.com:82/api/Tracking/GetTrackingNumberList?userUid=" + userUid +"",
+                        contentType: "application/json; charset=utf-8",
+                        dataType   : "json",
+                        error      : function (xhr, ajaxOptions, thrownError) {
+                            alert("error " + xhr.responseText);
+                        }
+                    },
+                //  parameterMap: function(options) {
+                // return {
+                //     take: options.take,
+                //     skip: options.skip,
+                //     page: options.page,
+                //     pageSize: options.pageSize
+                // };
+                // }
+            }, 
+             schema         : {
+              total: function (data) {
+                    return data.Count;
+                }, 
+                    data: function (data) {
+                    return data.TrackingList;
+                } 
+                },
+            serverPaging: false, 
+            pageSize: 20 
+        });
+
+        $("#pull-with-endless-listview").kendoMobileListView({
+            dataSource: dataSource,
+            template: $("#pull-with-endless-template").text(),
+            pullToRefresh: true,
+            endlessScroll: true
+        });
+
+        $("#addNew").click(function () {
+            loader.show();
+            addProductDataSource.add({
+                TrackingNumber: $("#name").val()
+                //ProductName: $("#name").val(),
+                //UnitPrice: Math.floor((Math.random() * 10) + 1)
+            });
+        });
+    }
+
+    function closeModalViewAdd() {
+        $("#modalview-add").kendoMobileModalView("close");
+    }
+
+    function addNew() {
+        addProductDataSource.add({
+			TrackingUid: 0,
+            TrackingNumber: $("#name").val(),
+            CarrierName: "USPS",
+			UserUid: 1
+            //UnitPrice: Math.floor((Math.random() * 10) + 1)
+        });
+
+        closeModalViewAdd();
+    } 
+
+    var addProductDataSource = new kendo.data.DataSource({
+        transport: {
+            create: {
+                url: "http://centralapi.aliasmedia.com:82/api/Tracking/SaveTrackingID",
+                contentType: "application/json; charset=utf-8",
+				dataType   : "json",
+            }, 
+               parameterMap: function (options, operation) {
+                if (operation !== "read" && options.models) {
+                    return { models: kendo.stringify(options.models) };
+                }
+            }
+        },
+        schema: {
+            model: {
+                id: "ID",
+                fields: {
+                    TrackingUid: { type: "int"},
+					CarrierName: { type: "string" },
+                    TrackingNumber: { type: "string" },
+                    UserUid: { type: "int" }
+                }
+            }
+        },
+        autoSync: true,
+        batch: true,
+        requestEnd: function () {
+            $("#name").val("");
+        }
+    });
+</script>
+    <!--Package Tracker template
     <script type="text/x-kendo-tmpl" id="tracker-template">
-        <div>
+       <div>
             <div class="position-left">
                 <span class="weather-info date">#=TrackingNumber#</span>
             </div>
@@ -150,8 +261,8 @@
             <div class="position-center">
                 <span class="weather-icon"></span>
             </div>
-        </div>
-    </script>
+        </div> 
+    </script>-->
 
     <!--Layout-->
     <div data-role="layout" data-id="tabstrip-layout">
@@ -181,7 +292,7 @@
                 endlessScroll: true,
                 dataSource: data.artists,
                 template: $("#artists-list-template").text(),
-                scrollTreshold: 10
+                scrollThreshold: 10
             });
 
 
@@ -191,9 +302,6 @@
     <script id="artists-list-template" type="text/x-kendo-tmpl">
             <span style="display: inline-block;white-space: nowrap;">#=FirstName#</span>
     </script>
-      <script id="rate-list-template" type="text/x-kendo-tmpl">
-            <span style="display: inline-block;white-space: nowrap;">#=Carrier#</span>
-             <span style="display: inline-block;white-space: nowrap;">#=Charge#</span>
-    </script>
+      
 </body>
 </html>
