@@ -1,336 +1,392 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title></title>
-    <meta charset="utf-8" />
-    <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
-    <link href="styles/main.css" rel="stylesheet" />
-
-    <script src="cordova.js"></script>
-    <script src="kendo/js/jquery.min.js"></script>
-    <script src="kendo/js/kendo.mobile.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
-
-    <script src="scripts/data.js"></script>
-
-    <script src="scripts/getRate.js"></script>
-    <script src="scripts/login.js"></script>
-    <script src="scripts/location.js"></script>
-    <script src="scripts/weather.js"></script>
-     <script src="scripts/tracker.js"></script>
-    <script src="scripts/app.js"></script>
-
-</head>
-<body>
-    <!--Home-->
-    <div id="tabstrip-rates" 
-        data-role="view"
-        data-title="Rates"
-        data-model="app.getrateService.viewModel">
-        <div class="view-content"> 
-            <ul id="artistsListView" data-role="listview" data-style="inset"></ul>
-            <br /> <br /> <br /> <br />
-            <ul>
-                <li>
-                    <label>
-                        From
-                    <input type="number" id="from" value="Text" />
-                    </label>
-                </li> 
-                <li>
-                    <label>
-                        To 
-                    <input type="number" id="to" value="Text" />
-                    </label>
-                </li>
-
-            </ul>
-            <div class="buttonArea">
-                <input type="submit" id="btnGetRate" data-role="button" data-bind="click: onGetRate" value="Get Rate" />
-            </div>
-              <ul id="rateListView" data-role="listview"  data-style="inset"></ul>
-        </div>
-    </div>
-
-    <!--Login
-    <div id="tabstrip-login"
-        data-role="view"
-        data-title="Login"
-        data-model="app.loginService.viewModel">
-
-        <div class="view-content">
-            <div class="logo"></div>
-            <h3 data-bind="invisible: isLoggedIn">Enter your credentials:</h3>
-            <h1 class="welcome" data-bind="visible: isLoggedIn">Welcome, <span data-bind="text: username"></span>!
-            </h1>
-            <div class="buttonArea">
-                <input type="submit" id="logout" data-role="button" data-bind="click: onLogout, visible: isLoggedIn" class="login-button" value="Logout" />
-            </div>
-
-            <form data-bind="events: { keyup: checkEnter }">
-                <ul data-role="listview" data-style="inset" data-bind="invisible: isLoggedIn">
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+        <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+        <link href="styles/main.css" rel="stylesheet" />
+        
+        <script src="cordova.js"></script>
+        <script src="kendo/js/jquery.min.js"></script>
+        <script src="kendo/js/kendo.mobile.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+        
+        <script src="scripts/data.js"></script>
+        
+        <script src="scripts/getRate.js"></script>
+        <script src="scripts/login.js"></script>
+        <script src="scripts/location.js"></script>
+        <script src="scripts/weather.js"></script>
+        <script src="scripts/tracker.js"></script>
+        <script src="scripts/app.js"></script>
+        
+    </head>
+    <body>
+        <!--Home-->
+        <div id="tabstrip-rates" 
+             data-role="view"
+             data-title="Rates"
+             data-model="app.getrateService.viewModel">
+            <div class="view-content"> 
+                <ul id="artistsListView" data-role="listview" data-style="inset"></ul>
+                <br /> <br /> <br /> <br />
+                <ul>
                     <li>
                         <label>
-                            Username
-                                <input type="text" data-bind="value: username" />
+                            From
+                            <input type="number" id="from" value="Text" />
                         </label>
-                    </li>
+                    </li> 
                     <li>
                         <label>
-                            Password
-                                <input type="password" data-bind="value: password" />
+                            To 
+                            <input type="number" id="to" value="Text" />
                         </label>
                     </li>
+                    
                 </ul>
-
                 <div class="buttonArea">
-                    <input type="submit" id="login" data-role="button" data-bind="click: onLogin, invisible: isLoggedIn" class="login-button" value="Login" />
+                    <input type="submit" id="btnGetRate" data-role="button" data-bind="click: onGetRate" value="Get Rate" />
                 </div>
-            </form>
+                <ul id="rateListView" data-role="listview"  data-style="inset"></ul>
+            </div>
         </div>
+        
+        <!--Login
+<div id="tabstrip-login"
+data-role="view"
+data-title="Login"
+data-model="app.loginService.viewModel">
 
-    </div>
+<div class="view-content">
+<div class="logo"></div>
+<h3 data-bind="invisible: isLoggedIn">Enter your credentials:</h3>
+<h1 class="welcome" data-bind="visible: isLoggedIn">Welcome, <span data-bind="text: username"></span>!
+</h1>
+<div class="buttonArea">
+<input type="submit" id="logout" data-role="button" data-bind="click: onLogout, visible: isLoggedIn" class="login-button" value="Logout" />
+</div>
+
+<form data-bind="events: { keyup: checkEnter }">
+<ul data-role="listview" data-style="inset" data-bind="invisible: isLoggedIn">
+<li>
+<label> 
+Username
+<input type="text" data-bind="value: username" />
+</label>
+</li>
+<li>
+<label>
+Password
+<input type="password" data-bind="value: password" />
+</label>
+</li>
+</ul>
+
+<div class="buttonArea">
+<input type="submit" id="login" data-role="button" data-bind="click: onLogin, invisible: isLoggedIn" class="login-button" value="Login" />
+</div>
+</form>
+</div>
+
+</div>
 -->
-    <!--Location-->
-    <div id="tabstrip-location"
-        data-role="view"
-        data-title="Drop"
-        data-init="app.locationService.initLocation"
-        data-show="app.locationService.show"
-        data-hide="app.locationService.hide"
-        data-model="app.locationService.viewModel"
-        data-stretch="true">
-
-        <div id="no-map" data-bind="invisible: isGoogleMapsInitialized">
-            Drop off locator requires internet connection to display the map.
+        <!--Location-->
+        <div id="tabstrip-location"
+             data-role="view"
+             data-title="Drop"
+             data-init="app.locationService.initLocation"
+             data-show="app.locationService.show"
+             data-hide="app.locationService.hide"
+             data-model="app.locationService.viewModel"
+             data-stretch="true">
+            
+            <div id="no-map" data-bind="invisible: isGoogleMapsInitialized">
+                Drop off locator requires internet connection to display the  map.
+            </div>
+            <div id="map-search-wrap" data-bind="visible: isGoogleMapsInitialized">
+                <button id="map-navigate-home" data-bind="click: onNavigateHome"></button>
+                <form onsubmit="return false;">
+                    <input id="map-address" type="search" data-bind="value: address" placeholder="Address" />
+                    <input id="map-search" type="submit" value="" data-bind="click: onSearchAddress" />
+                </form>
+            </div>
+            <div id="map-canvas" data-bind="visible: isGoogleMapsInitialized"></div> 
+            
         </div>
-        <div id="map-search-wrap" data-bind="visible: isGoogleMapsInitialized">
-            <button id="map-navigate-home" data-bind="click: onNavigateHome"></button>
-            <form onsubmit="return false;">
-                <input id="map-address" type="search" data-bind="value: address" placeholder="Address" />
-                <input id="map-search" type="submit" value="" data-bind="click: onSearchAddress" />
-            </form>
+        
+        <!--Package Tracker-->
+        <div  id="tabstrip-tracker" data-role="view" data-title="Track" data-init="mobileListViewPullWithEndless" data-title="Pull to refresh">
+            <header data-role="header"> 
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                    <a data-align="left" data-icon="add" data-role="button" data-rel="modalview" href="#modalview-add"></a>
+                  <!--  <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a> -->
+                </div>
+            </header>
+            <ul id="pull-with-endless-listview"></ul>
         </div>
-        <div id="map-canvas" data-bind="visible: isGoogleMapsInitialized"></div>
-
-    </div>
-
-    <!--Package Tracker-->
-    <div  id="tabstrip-tracker" data-role="view" data-title="Track" data-init="mobileListViewPullWithEndless" data-title="Pull to refresh">
-    <header data-role="header">
-        <div data-role="navbar">
-            <span data-role="view-title"></span>
-            <a data-align="left" data-icon="add" data-role="button" data-rel="modalview" href="#modalview-add"></a>
-            <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a>
+        
+        <div data-role="modalview" id="modalview-add" style="width: 95%; height: 12em;">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <span>Add Tracking Number</span> 
+                    <a data-click="closeModalViewAdd" data-role="button" data-align="right">Cancel</a>
+                </div>
+            </div>
+            
+            <ul data-role="listview" data-style="inset">
+                <li>
+                    <label for="username">Packages:</label>
+                    <input type="text" id="name" /></li>
+            </ul>
+            <a data-click="addNew" class="addNew" type="button" data-role="button">Add New Tracking Number</a>
         </div>
-    </header>
-    <ul id="pull-with-endless-listview"></ul>
-</div>
-
-<div data-role="modalview" id="modalview-add" style="width: 95%; height: 12em;">
-    <div data-role="header">
-        <div data-role="navbar">
-            <span>Add Tracking Number</span>
-            <a data-click="closeModalViewAdd" data-role="button" data-align="right">Cancel</a>
+        
+        <div data-role="modalview" id="packageTrackingDetailsModalView" style="width: 95%; height: 12em;">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <span>Status</span>
+                    <a data-click="packageTrackingDetailsModalView_Close" data-role="button" data-align="right">Close</a>
+                </div>
+            </div>
+            
+            <ul data-role="listview" data-style="inset">
+                <li> 
+                    
+                    <ul id="trackingDetailsListView"  >  
+                    </ul>
+                    
+                </li> 
+            </ul>
         </div>
-    </div>
-
-    <ul data-role="listview" data-style="inset">
-        <li>
-            <label for="username">Packages:</label>
-            <input type="text" id="name" /></li>
-    </ul>
-    <a data-click="addNew" class="addNew" type="button" data-role="button">Add New Tracking Number</a>
-</div>
-    
-<div data-role="modalview" id="packageTrackingDetailsModalView" style="width: 95%; height: 12em;">
-    <div data-role="header">
-        <div data-role="navbar">
-            <span>Package Details</span>
-            <a data-click="packageTrackingDetailsModalView_Close" data-role="button" data-align="right">Close</a>
-        </div>
-    </div>
-
-    <ul data-role="listview" data-style="inset">
-        <li>
-            <input type="text" id="trackingDetails" />
-        </li>
-    </ul>
-</div>
-<!-- <a href="\#packageTrackingDetailsModalView?id=#:TrackingNumber#" class="km-listview-link" data-role="listview-link">#:TrackingNumber#</a> -->
-<script type="text/x-kendo-tmpl" id="pull-with-endless-template">
+        <script type="text/x-kendo-tmpl" id="trackingDetailsTemplate"> 
+        <p>#:description#</p> 
+         <p>#:timestamp#</p> 
+        </script> 
+        <!-- <a href="\#packageTrackingDetailsModalView?id=#:TrackingNumber#" class="km-listview-link" data-role="listview-link">#:TrackingNumber#</a> -->
+        <script type="text/x-kendo-tmpl" id="pull-with-endless-template">
 
     <div class="product-item">
        <h3>
        
-         <a   data-role="button" data-rel="modalview" data-trackingnumber="#:TrackingNumber#" data-click="viewPackgeTrackingDetails_Click" >#:TrackingNumber#</a>
-    </h3>
-    </div>
+         <a   data-role="button" data-rel="modalview" data-trackinguid="#:TrackingUid#" data-click="viewPackgeTrackingDetails_Click" >#:TrackingNumber#</a>
+        </h3>
+        </div>
     
-</script> 
-<script>
-    function mobileListViewPullWithEndless(e) {
-        var userUid = "1";
-        var dataSource = new kendo.data.DataSource({
-            transport: {
-                read: {
-                        type       : "GET",
-                        url        : "http://centralapi.aliasmedia.com:82/api/Tracking/GetTrackingNumberList?userUid=" + userUid +"",
+        </script> 
+        <script>
+            function mobileListViewPullWithEndless(e) {
+                var userUid = "1";
+                var dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            type       : "GET",
+                            url        : "http://centralapi.aliasmedia.com:82/api/Tracking/GetTrackingNumberList?userUid=" + userUid +"",
+                            contentType: "application/json; charset=utf-8",
+                            dataType   : "json",
+                            error      : function (xhr, ajaxOptions, thrownError) {
+                                alert("error " + xhr.responseText);
+                            }
+                        },
+                        //  parameterMap: function(options) {
+                        // return {
+                        //     take: options.take,
+                        //     skip: options.skip,
+                        //     page: options.page,
+                        //     pageSize: options.pageSize
+                        // };
+                        // }
+                    }, 
+                    schema         : {
+                        total: function (data) {
+                            return data.Count;
+                        }, 
+                        data: function (data) {
+                            return data.TrackingList;
+                        } 
+                    },
+                    serverPaging: false, 
+                    pageSize: 20 
+                });
+                
+                $("#pull-with-endless-listview").kendoMobileListView({
+                    dataSource: dataSource,
+                    template: $("#pull-with-endless-template").text(),
+                    pullToRefresh: true,
+                    endlessScroll: true
+                });
+                
+                
+                
+                $("#addNew").click(function () {
+                    loader.show();
+                    addProductDataSource.add({
+                        TrackingNumber: $("#name").val()
+                        //ProductName: $("#name").val(),
+                        //UnitPrice: Math.floor((Math.random() * 10) + 1)
+                    });
+                });
+            }
+            
+            function viewPackgeTrackingDetails_Click(e) {
+                var data = e.button.data();
+                // $("#hfTrackingNumber").val(data.trackinguid);
+                
+                // $("#lblPackageStatus").val(data.trackinguid);
+                
+                var trackingDetailsDataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            type       : "GET",
+                            url        : "http://centralapi.aliasmedia.com:82/api/Tracking/TrackPackage?TrackingUid=" + data.trackinguid + "",
+                            contentType: "application/json; charset=utf-8",
+                            dataType   : "json",
+                            error      : function (xhr, ajaxOptions, thrownError) {
+                                alert("error " + xhr.responseText);
+                            }
+                        },
+                        // parameterMap: function(options) {
+                        //  return {
+                        //     TrackUid: 1
+                        //  };
+                        //  }
+                    },  
+                    schema         : {
+                        total: function (data) {
+                            return data.Count;
+                        },  
+                        data: function (data) {
+                            return data.Data;
+                        },
+                        model: {
+                            fields: {
+                                timestamp : {
+                                    type: "date",
+                                    parse: function(value) {
+                                        return new Date(value * 1000);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+                
+                $("#trackingDetailsListView").kendoMobileListView({
+                    dataSource: trackingDetailsDataSource,
+                    template: $("#trackingDetailsTemplate").text(),
+                    
+                    
+                });
+                
+                $("#packageTrackingDetailsModalView").kendoMobileModalView("open");
+            }
+            
+            function packageTrackingDetailsModalView_Close() {
+                $("#packageTrackingDetailsModalView").kendoMobileModalView("close");
+            }
+            
+            function closeModalViewAdd() {
+                $("#modalview-add").kendoMobileModalView("close");
+            }
+            
+            function addNew() {
+                addProductDataSource.add({
+                    TrackingUid: 0,
+                    TrackingNumber: $("#name").val(),
+                    CarrierName: "USPS",
+                    UserUid: 1
+                    //UnitPrice: Math.floor((Math.random() * 10) + 1)
+                });
+                
+                closeModalViewAdd();
+            } 
+            
+            var addProductDataSource = new kendo.data.DataSource({
+                transport: {
+                    create: {
+                        url: "http://centralapi.aliasmedia.com:82/api/Tracking/SaveTrackingID",
                         contentType: "application/json; charset=utf-8",
                         dataType   : "json",
-                        error      : function (xhr, ajaxOptions, thrownError) {
-                            alert("error " + xhr.responseText);
+                    }, 
+                    parameterMap: function (options, operation) {
+                        if (operation !== "read" && options.models) {
+                            return { models: kendo.stringify(options.models) };
                         }
-                    },
-                //  parameterMap: function(options) {
-                // return {
-                //     take: options.take,
-                //     skip: options.skip,
-                //     page: options.page,
-                //     pageSize: options.pageSize
-                // };
-                // }
-            }, 
-             schema         : {
-              total: function (data) {
-                    return data.Count;
-                }, 
-                    data: function (data) {
-                    return data.TrackingList;
-                } 
+                    }
                 },
-            serverPaging: false, 
-            pageSize: 20 
-        });
-
-        $("#pull-with-endless-listview").kendoMobileListView({
-            dataSource: dataSource,
-            template: $("#pull-with-endless-template").text(),
-            pullToRefresh: true,
-            endlessScroll: true
-        });
-
-        $("#addNew").click(function () {
-            loader.show();
-            addProductDataSource.add({
-                TrackingNumber: $("#name").val()
-                //ProductName: $("#name").val(),
-                //UnitPrice: Math.floor((Math.random() * 10) + 1)
+                schema: {
+                    model: {
+                        id: "ID",
+                        fields: {
+                            TrackingUid: { type: "int"},
+                            CarrierName: { type: "string" },
+                            TrackingNumber: { type: "string" },
+                            UserUid: { type: "int" }
+                        }
+                    }
+                },
+                autoSync: true,
+                batch: true,
+                requestEnd: function () {
+                    $("#name").val("");
+                }
             });
-        });
-    }
-    
-    function viewPackgeTrackingDetails_Click(e) {
-            var data = e.button.data();
-            $("#trackingDetails").val(data.trackingnumber);
-         $("#packageTrackingDetailsModalView").kendoMobileModalView("open");
-        }
-
-	function packageTrackingDetailsModalView_Close() {
-        $("#packageTrackingDetailsModalView").kendoMobileModalView("close");
-    }
-    
-    function closeModalViewAdd() {
-        $("#modalview-add").kendoMobileModalView("close");
-    }
-
-    function addNew() {
-        addProductDataSource.add({
-			TrackingUid: 0,
-            TrackingNumber: $("#name").val(),
-            CarrierName: "USPS",
-			UserUid: 1
-            //UnitPrice: Math.floor((Math.random() * 10) + 1)
-        });
-
-        closeModalViewAdd();
-    } 
-
-    var addProductDataSource = new kendo.data.DataSource({
-        transport: {
-            create: {
-                url: "http://centralapi.aliasmedia.com:82/api/Tracking/SaveTrackingID",
-                contentType: "application/json; charset=utf-8",
-				dataType   : "json",
-            }, 
-               parameterMap: function (options, operation) {
-                if (operation !== "read" && options.models) {
-                    return { models: kendo.stringify(options.models) };
-                }
-            }
-        },
-        schema: {
-            model: {
-                id: "ID",
-                fields: {
-                    TrackingUid: { type: "int"},
-					CarrierName: { type: "string" },
-                    TrackingNumber: { type: "string" },
-                    UserUid: { type: "int" }
-                }
-            }
-        },
-        autoSync: true,
-        batch: true,
-        requestEnd: function () {
-            $("#name").val("");
-        }
-    });
-</script>
-    <!--Package Tracker template
-    <script type="text/x-kendo-tmpl" id="tracker-template">
-       <div>
-            <div class="position-left">
-                <span class="weather-info date">#=TrackingNumber#</span>
+        </script>
+        <!--Package Tracker template
+<script type="text/x-kendo-tmpl" id="tracker-template">
+<div>
+<div class="position-left">
+<span class="weather-info date">#=TrackingNumber#</span>
+</div>
+<div class="position-right">
+<span class="weather-info temperature high">#=TrackingNumber#<sup>&deg;</sup></span>
+<span class="weather-info temperature low">#=TrackingNumber#<sup>&deg;</sup></span>
+</div>
+<div class="position-center">
+<span class="weather-icon"></span>
+</div>
+</div> 
+</script>-->
+        
+        <!--Layout-->
+        <div data-role="layout" data-id="tabstrip-layout">
+            
+            <!--Header-->
+            <div data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                </div>
             </div>
-            <div class="position-right">
-                <span class="weather-info temperature high">#=TrackingNumber#<sup>&deg;</sup></span>
-                <span class="weather-info temperature low">#=TrackingNumber#<sup>&deg;</sup></span>
-            </div>
-            <div class="position-center">
-                <span class="weather-icon"></span>
+            
+            <!--Footer-->
+            <div data-role="footer">
+                <div data-role="tabstrip">
+                    <a href="#tabstrip-rates" data-icon="home">Rates</a>
+                    <!--    <a href="#tabstrip-login" data-icon="contacts">Login</a> -->
+                    <a href="#tabstrip-location" data-icon="search">Drop Off Locations</a>
+                    <a href="#tabstrip-tracker" data-icon="globe">Tracker</a>
+                </div>
             </div>
         </div> 
-    </script>-->
-
-    <!--Layout-->
-    <div data-role="layout" data-id="tabstrip-layout">
-
-        <!--Header-->
-        <div data-role="header">
-            <div data-role="navbar">
-                <span data-role="view-title"></span>
-            </div>
-        </div>
-
-        <!--Footer-->
-        <div data-role="footer">
-            <div data-role="tabstrip">
-                <a href="#tabstrip-rates" data-icon="home">Rates</a>
-                <!--    <a href="#tabstrip-login" data-icon="contacts">Login</a> -->
-                <a href="#tabstrip-location" data-icon="search">Drop Off Locations</a>
-                <a href="#tabstrip-tracker" data-icon="globe">Tracker</a>
-            </div>
-        </div>
-    </div> 
-    <script>
-
-        $(function () {
-
-            $("#artistsListView").kendoMobileListView({
-                endlessScroll: true,
-                dataSource: data.artists,
-                template: $("#artists-list-template").text(),
-                scrollThreshold: 10
+        <script>
+            
+            $(function () {
+                
+                $("#artistsListView").kendoMobileListView({
+                    endlessScroll: true,
+                    dataSource: data.artists,
+                    template: $("#artists-list-template").text(),
+                    scrollThreshold: 10
+                });
+                
+                
             });
-
-
-        });
-
-    </script>
-    <script id="artists-list-template" type="text/x-kendo-tmpl">
+            
+        </script>
+        <script id="artists-list-template" type="text/x-kendo-tmpl">
             <span style="display: inline-block;white-space: nowrap;">#=FirstName#</span>
-    </script>
-      
-</body>
+        </script>
+        
+    </body>
 </html>
