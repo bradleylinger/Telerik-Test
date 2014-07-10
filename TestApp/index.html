@@ -231,7 +231,7 @@ Password
             
             function viewPackgeTrackingDetails_Click(e) {
                 var data = e.button.data();
-                // $("#hfTrackingNumber").val(data.trackinguid);
+                // $("#hfTrackingNumber").val(data.trackinguid); 
                 
                 // $("#lblPackageStatus").val(data.trackinguid);
                 
@@ -387,6 +387,14 @@ Password
         <script id="artists-list-template" type="text/x-kendo-tmpl">
             <span style="display: inline-block;white-space: nowrap;">#=FirstName#</span>
         </script>
+        
+          <script id="rate-list-template" type="text/x-kendo-tmpl">
+                      <span style="display: inline-block;white-space: nowrap;">#:Carrier #</span>
+            <span style="display: inline-block;white-space: nowrap;">#:Charge #</span>
+
+            <span style="display: inline-block;white-space: nowrap;">#:Service #</span>
+        </script>
+        
         
     </body>
 </html>

@@ -28,6 +28,9 @@
                 }
             },
             schema: {
+                 total: function (data) {
+                            return data.Count;
+                        },  
                 data: function (data) {
                     return data.Data;
                 }
@@ -52,9 +55,14 @@
                     }
                 },
                 schema         : {
-                    data: "Data"
+                    total: function (data) {
+                            return data.Count;
+                        }, 
+                     data: function (data) {
+                    return data.Data;
+                }
                 },
-                type           : "json",
+                
                 parameterMap   : function (options) {
                     return JSON.stringify(options);
                 }
